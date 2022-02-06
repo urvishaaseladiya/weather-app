@@ -1,0 +1,130 @@
+/* You can add global styles to this file, and also import other style files */
+@import "node_modules/ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+@import "node_modules/ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
+
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 100%;
+  background-color: #fafafa;
+}
+
+.main-container {
+  margin: 2em;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media screen and (min-width: 920px) {
+  .main-container {
+    width: 880px;
+    margin: 8px auto;
+    font-size: 1.1em;
+  }
+}
+
+/* location-and-date */
+.location-and-date {
+  width: 100%;
+  text-align: center;
+}
+
+.location-and-date__location {
+  margin: 0;
+  font-size: 2.5em;
+  color: #828282;
+  font-weight: 400;
+}
+
+.location-and-date__temperature {
+  font-size: 1.3em;
+  font-weight: 400;
+}
+
+.location-and-date__time {
+  font-size: em;
+  color: #a3a3a3;
+}
+
+.bottom-border {
+  flex: 1;
+  height: 1px;
+  background-color: #66b3a6;
+  margin: 2em;
+}
+
+/* weather-by-day */
+.weather-by-day {
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
+@media screen and (min-width: 400px) {
+  .weather-by-day {
+    display: inline-flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .weather-by-day__icon {
+    width: 18rem !important;
+    padding: 1rem 3rem !important;
+  }
+}
+
+@media screen and (min-width: 400px) and (max-width: 830px) {
+  .weather-by-day {
+    overflow: auto;
+    min-width: 365px;
+  }
+  .weather-by-day__day {
+    margin-bottom: 0.5em;
+    font-size: 2em;
+    font-weight: 400;
+  }
+
+  .weather-by-day__temperature {
+    font-size: 1.3em;
+    font-weight: 400;
+  }
+  .weather-by-day__icon {
+    width: 12rem !important;
+    padding: 2rem !important;
+  }
+}
+
+.weather-by-day__item {
+  padding: 1em;
+}
+
+.weather-by-day__container {
+  display: flex;
+  justify-content: center;
+}
+
+.weather-by-day__icon {
+  width: 7rem;
+  padding: 1rem;
+}
+
+.weather-by-day__day {
+  margin-bottom: 0.5em;
+  font-size: 1.3em;
+  font-weight: 400;
+}
+
+.weather-by-day__temperature {
+  font-size: 1em;
+  font-weight: 400;
+}
