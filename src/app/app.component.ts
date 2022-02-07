@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, HostListener } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Subscription } from 'rxjs';
 import { APP_CONSTANTS } from './_constants/app.constants';
@@ -50,6 +50,9 @@ export class AppComponent implements OnInit, OnDestroy {
     nav: false,
   }; // options for day vise weather data carousel
   apiSubscriptions: Subscription[] = []; // api subscriptions
+  screenWidth: any;
+  screenHeight: any;
+  
 
   constructor(
     private weatherDataService: WeatherDataService,
@@ -58,6 +61,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getLocation();
+    this.screenWidth = window.innerWidth;
+    this.screenHeight = window.innerHeight;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    this.screenWidth = window.innerWidth;
+    this.screenHeight = window.innerHeight;
   }
 
   // This will request a location permission from user to find that location's weather data

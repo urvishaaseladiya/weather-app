@@ -27,7 +27,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content fxFlexFill>
-    <main class="main-container">
+    <main class="main-container" *ngIf="screenWidth > 400">
       <mat-spinner *ngIf="isAPILoading; else weatherDataTemplate">Loading weather Data</mat-spinner>
       <ng-template #weatherDataTemplate>
         <div class="location-and-date">
@@ -57,6 +57,58 @@
                   <div class="weather-by-day__temperature">{{doNumberRounding(dayData.temperature.min)}} /
                     {{doNumberRounding(dayData.temperature.max)}}&deg; C</div>
                   <div class="weather-by-day__temperature">{{dayData.wind.max}} m/s</div>
+                </div>
+              </ng-template>
+            </ng-container>
+          </owl-carousel-o>
+        </div>
+
+      </ng-template>
+    </main>
+
+    <main class="main-container" *ngIf="screenWidth < 400">
+      <mat-spinner *ngIf="isAPILoading; else weatherDataTemplate">Loading weather Data</mat-spinner>
+      <ng-template #weatherDataTemplate>
+        <div class="weather-by-day">
+          <owl-carousel-o [options]="options">
+            <ng-template carouselSlide id="location-div">
+              <div class="location-and-date">
+                <h1 class="location-and-date__location">{{city}}</h1>
+                <div><img
+                    src="https://www.yr.no/assets/images/svg/{{getSymbolDetail(weatherForecastData.dayIntervals[0].twentyFourHourSymbol).symbol_id}}.svg"
+                    class="current-temperature__icon" alt="" style="width: 20em;padding: 4em"></div>
+                <div class="location-and-date__temperature">
+                  {{doNumberRounding(weatherForecastData.shortIntervals[0].temperature.value)}} &deg;C</div>
+                <div class="location-and-date__temperature">{{weatherForecastData.shortIntervals[0].wind.speed}} m/s
+                </div>
+                <div class="location-and-date__time">{{currentDay}} {{currentTime}}</div>
+                <div class="location-and-date__time">
+                  {{getSymbolDetail(weatherForecastData.dayIntervals[0].twentyFourHourSymbol).name}}</div>
+              </div>
+            </ng-template>
+            <ng-container>
+              <ng-template carouselSlide id="weather-div">
+                <div class="next-5-days">
+                  <div class="next-5-days__container">
+                    <div class="next-5-days__row"
+                      *ngFor="let dayData of weatherForecastData?.dayIntervals; let i = index">
+                      <div class="next-5-days__date">
+                        {{getDayFromDate(dayData.start)}}
+                      </div>
+                      <div class="next-5-days__icon">
+                        <img
+                          src="https://www.yr.no/assets/images/svg/{{getSymbolDetail(dayData.twentyFourHourSymbol).symbol_id}}.svg"
+                          title="{{getSymbolDetail(dayData.twentyFourHourSymbol).name}}">
+                      </div>
+                      <div class="next-5-days__low">
+                        {{doNumberRounding(dayData.temperature.min)}} /
+                        {{doNumberRounding(dayData.temperature.max)}}&deg; C
+                      </div>
+                      <div class="next-5-days__high">
+                        {{dayData.wind.max}} m/s
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </ng-template>
             </ng-container>
